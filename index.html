@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自動火災報知設備 判定アプリ</title>
+    
+    <!-- PWA対応メタタグ -->
+    <meta name="description" content="消防法施行令第21条に基づく自動火災報知設備の設置義務と特小自火報の適用可否を判定するWebアプリ">
+    <meta name="theme-color" content="#34485e">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="火災報知判定">
+    <meta name="msapplication-TileColor" content="#34485e">
+    <meta name="msapplication-tap-highlight" content="no">
+    
+    <!-- アイコン関連 -->
+    <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+    <link rel="apple-touch-icon" href="icons/icon.svg">
+    <link rel="mask-icon" href="icons/icon.svg" color="#34485e">
+    
+    <!-- PWAマニフェスト -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- スタイルシート -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- アプリケーションヘッダー -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">
+                    <span class="material-icons">local_fire_department</span>
+                    自動火災報知設備 判定アプリ
+                </h1>
+                <p class="app-subtitle">消防法施行令第21条に基づく設置義務と特小自火報の適用可否を判定</p>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <!-- 入力フォーム -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h2>建物情報の入力</h2>
+                    <p>設置義務の判定に必要な建物情報を入力してください</p>
+                </div>
+
+                <form id="building-form" class="building-form">
+                    <!-- 基本情報 -->
+                    <div class="form-group">
+                        <label for="primary-use" class="form-label">主用途</label>
+                        <select id="primary-use" name="primary-use" class="form-select" required>
+                            <option value="">選択してください</option>
+                            <option value="(1)項イ">(1)項イ 劇場、映画館、演芸場又は観覧場</option>
+                            <option value="(1)項ロ">(1)項ロ 公会堂又は集会場</option>
+                            <option value="(2)項イ">(2)項イ キャバレー、カフェー、ナイトクラブその他これらに類するもの</option>
+                            <option value="(2)項ロ">(2)項ロ 遊技場又はダンスホール</option>
+                            <option value="(2)項ハ">(2)項ハ 風俗営業等の規制及び業務の適正化等に関する法律に規定する性風俗関連特殊営業を営む店舗その他これに類するもの</option>
+                            <option value="(3)項イ">(3)項イ 待合、料理店その他これらに類するもの</option>
+                            <option value="(3)項ロ">(3)項ロ 飲食店</option>
+                            <option value="(4)項">(4)項 百貨店、マーケットその他の物品販売業を営む店舗又は展示場</option>
+                            <option value="(5)項イ">(5)項イ 旅館、ホテル、宿泊所その他これらに類するもの</option>
+                            <option value="(5)項ロ">(5)項ロ 寄宿舎、下宿又は共同住宅</option>
+                            <option value="(6)項イ">(6)項イ 病院、診療所又は助産所</option>
+                            <option value="(6)項ロ">(6)項ロ 老人福祉施設、有料老人ホーム、介護老人保健施設、救護施設、更生施設、児童福祉施設等</option>
+                            <option value="(6)項ハ">(6)項ハ 幼稚園、盲学校、聾学校又は養護学校</option>
+                            <option value="(7)項">(7)項 小学校、中学校、高等学校、中等教育学校、高等専門学校、大学、専修学校、各種学校その他これらに類するもの</option>
+                            <option value="(8)項">(8)項 図書館、博物館、美術館その他これらに類するもの</option>
+                            <option value="(9)項イ">(9)項イ 公衆浴場のうち、蒸気浴場、熱気浴場その他これらに類するもの</option>
+                            <option value="(9)項ロ">(9)項ロ イに掲げる公衆浴場以外の公衆浴場</option>
+                            <option value="(10)項">(10)項 車両の停車場又は船舶若しくは航空機の発着場</option>
+                            <option value="(11)項">(11)項 神社、寺院、教会その他これらに類するもの</option>
+                            <option value="(12)項イ">(12)項イ 工場又は作業場</option>
+                            <option value="(12)項ロ">(12)項ロ 映画スタジオ又はテレビスタジオ</option>
+                            <option value="(13)項イ">(13)項イ 自動車車庫又は駐車場</option>
+                            <option value="(13)項ロ">(13)項ロ 飛行機又は回転翼航空機の格納庫</option>
+                            <option value="(14)項">(14)項 倉庫</option>
+                            <option value="(15)項">(15)項 前各項に該当しない事業場</option>
+                            <option value="(16)項イ">(16)項イ 複合用途防火対象物（特定用途を含む）</option>
+                            <option value="(16)項ロ">(16)項ロ 複合用途防火対象物（その他）</option>
+                            <option value="(16の2)項">(16の2)項 地下街</option>
+                            <option value="(16の3)項">(16の3)項 地下道に面する建築物</option>
+                            <option value="(17)項">(17)項 重要文化財</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="total-area" class="form-label">延べ面積（㎡）</label>
+                        <input type="number" id="total-area" name="total-area" class="form-input" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ground-floors" class="form-label">地上階数</label>
+                        <input type="number" id="ground-floors" name="ground-floors" class="form-input" min="1" max="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="basement-floors" class="form-label">地下階数</label>
+                        <input type="number" id="basement-floors" name="basement-floors" class="form-input" min="0" max="10" value="0">
+                    </div>
+
+                    <!-- 動的フォーム部分 -->
+                    <div id="dynamic-form" class="dynamic-form">
+                        <!-- 動的に追加されるフォーム項目 -->
+                    </div>
+
+                    <!-- 指定可燃物 -->
+                    <div class="form-group">
+                        <label for="flammable-multiplier" class="form-label">
+                            指定可燃物の数量倍数
+                            <span class="help-icon" data-help="指定可燃物の数量倍数の合計を入力してください">
+                                <span class="material-icons">help_outline</span>
+                            </span>
+                        </label>
+                        <input type="number" id="flammable-multiplier" name="flammable-multiplier" class="form-input" min="0" step="0.01" value="0">
+                    </div>
+
+                    <!-- 特定一階段等防火対象物 -->
+                    <div class="form-group">
+                        <label class="form-label">特定一階段等防火対象物に該当するか</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="specific-single-stair" value="true" class="radio-input">
+                                <span class="radio-custom"></span>
+                                はい
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="specific-single-stair" value="false" class="radio-input" checked>
+                                <span class="radio-custom"></span>
+                                いいえ
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- アクションボタン -->
+                    <div class="form-actions">
+                        <button type="button" id="reset-btn" class="btn btn-secondary">
+                            <span class="material-icons">refresh</span>
+                            やり直し
+                        </button>
+                        <button type="submit" id="submit-btn" class="btn btn-primary">
+                            <span class="material-icons">analytics</span>
+                            判定する
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 結果表示エリア -->
+            <section id="result-section" class="result-section hidden">
+                <div class="section-header">
+                    <h2>判定結果</h2>
+                </div>
+
+                <div id="result-content" class="result-content">
+                    <!-- 判定結果が動的に表示される -->
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="app-footer">
+            <div class="footer-content">
+                <div class="disclaimer">
+                    <p><strong>免責事項:</strong> 本判定は簡易的なものであり、最終判断は所轄消防署にご確認ください。</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ヘルプモーダル -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="help-title">ヘルプ</h3>
+                <button id="close-help" class="modal-close">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="help-content"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="hantei.js"></script>
+    <script src="ui.js"></script>
+    <script src="main.js"></script>
+    
+    <!-- PWA Service Worker 登録 -->
+    <script>
+        // Service Worker の登録
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                        
+                        // Service Worker の更新チェック
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    // 新しい Service Worker が利用可能
+                                    if (confirm('アプリの新しいバージョンが利用可能です。更新しますか？')) {
+                                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        window.location.reload();
+                                    }
+                                }
+                            });
+                        });
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+                
+                // Service Worker が更新された時の処理
+                let refreshing = false;
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
+                    if (!refreshing) {
+                        window.location.reload();
+                        refreshing = true;
+                    }
+                });
+            });
+        }
+        
+        // PWA インストールプロンプト
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA インストールプロンプトが表示されました');
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // カスタムインストールボタンを表示（オプション）
+            // showInstallPromotion();
+        });
+        
+        // PWA がインストールされた時の処理
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('PWA がインストールされました');
+            // インストール完了の通知などを表示
+        });
+        
+        // オフライン状態の監視
+        window.addEventListener('online', () => {
+            console.log('オンラインになりました');
+            // オンライン復帰の通知を表示（オプション）
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log('オフラインになりました');
+            // オフライン状態の通知を表示（オプション）
+        });
+    </script>
+</body>
+</html>

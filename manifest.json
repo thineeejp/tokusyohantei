@@ -1,0 +1,55 @@
+{
+  "name": "自動火災報知設備 判定アプリ",
+  "short_name": "火災報知判定",
+  "description": "消防法施行令第21条に基づく自動火災報知設備の設置義務と特小自火報の適用可否を判定するWebアプリ",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#34485e",
+  "background_color": "#f0f4f7",
+  "lang": "ja",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": [
+    "utilities",
+    "business",
+    "productivity"
+  ],
+  "screenshots": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "判定を開始",
+      "short_name": "判定開始",
+      "description": "建物情報を入力して判定を開始する",
+      "url": "/",
+      "icons": [
+        {
+          "src": "icons/favicon.svg",
+          "sizes": "32x32",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}
