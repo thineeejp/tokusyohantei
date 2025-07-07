@@ -4,15 +4,15 @@ const STATIC_CACHE = 'fire-alarm-static-v1.0.0';
 
 // キャッシュするファイル一覧
 const CACHE_FILES = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/hantei.js',
-  '/ui.js',
-  '/main.js',
-  '/manifest.json',
-  '/icons/icon.svg',
-  '/icons/favicon.svg',
+  './',
+  './index.html',
+  './styles.css',
+  './hantei.js',
+  './ui.js',
+  './main.js',
+  './manifest.json',
+  './icons/icon.svg',
+  './icons/favicon.svg',
   // 外部リソース
   'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap',
   'https://fonts.googleapis.com/icon?family=Material+Icons'
@@ -103,7 +103,7 @@ self.addEventListener('fetch', (event) => {
             
             // オフライン時のフォールバック
             if (event.request.destination === 'document') {
-              return caches.match('/index.html');
+              return caches.match('./index.html');
             }
             
             // その他のリソースの場合はエラーを返す
@@ -155,7 +155,7 @@ self.addEventListener('notificationclick', (event) => {
   
   if (event.action === 'open') {
     event.waitUntil(
-      clients.openWindow('/')
+      clients.openWindow('./')
     );
   }
 });
